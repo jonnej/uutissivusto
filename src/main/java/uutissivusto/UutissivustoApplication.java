@@ -1,7 +1,5 @@
+package uutissivusto;
 
-package uutissivusto.app;
-
-import uutissivusto.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

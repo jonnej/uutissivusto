@@ -5,6 +5,8 @@
  */
 package uutissivusto.domain;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -18,16 +20,43 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author joju
  */
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class NewsItem extends AbstractPersistable<Long> {
     
     private String headline;
+    private String lead;
+    private LocalDateTime created;
+    private String text;
+    
     @ManyToMany
     private List<Writer> writers;
+    
     @ManyToMany
     private List<Category> categories;
-    private Long readCount;
+    
+    private int readCount;
+    
+    public NewsItem() {
+        this.created = LocalDateTime.now();
+    }
+    
+    public void addWriter(Writer wr) {
+        if (this.writers == null) {
+            this.writers = new ArrayList();
+        }
+        if (!this.writers.contains(wr)) {
+            this.writers.add(wr);
+        }
+    }
+    
+    public void addCategory(Category ca) {
+        if (this.categories == null) {
+            this.categories = new ArrayList();
+        }
+        if (!this.categories.contains(ca)) {
+            this.categories.add(ca);
+        }
+    }
    
 }

@@ -5,6 +5,7 @@
  */
 package uutissivusto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -27,4 +28,13 @@ public class Category extends AbstractPersistable<Long> {
     
     @ManyToMany
     private List<NewsItem> newsItems;
+    
+    public void addNewsItem(NewsItem ni) {
+        if (this.newsItems == null) {
+            this.newsItems = new ArrayList();
+        }
+        if (!this.newsItems.contains(ni)) {
+            this.newsItems.add(ni);
+        }
+    }
 }
