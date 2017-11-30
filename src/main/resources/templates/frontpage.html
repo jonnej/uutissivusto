@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">>
+    <head lang="en">
+      <style>
+
+      li.hidden {border-style: hidden;}
+
+      </style>
+        <meta charset="UTF-8" />
+        <title>Welcome to News paradise!</title>
+    </head>
+    <body>
+
+      <h2>Newest News</h2>
+
+      <ul list-style-type="none">
+        <li th:each="newsitem :${newsItems}">
+          <strong><a href="@{/news/{id}(id=${newsitem.id})}" th:text="${newsitem.headline}">headline</a></strong>
+          <p th:text="${newsitem.lead}">lead</p>
+
+        </li>
+
+
+    </body>
+
+</html>

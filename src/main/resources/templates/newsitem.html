@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">>
+    <head lang="en">
+    <style>
+    li {
+display: inline-block;
+margin: 0 10px;
+}
+    </style>
+        <meta charset="UTF-8" />
+        <title th:text="${newsItem.headline}"></title>
+    </head>
+    <body>
+      <h1 th:text="${newsItem.headline}">Headline</h1>
+      <ul list-style-type="none">
+      <li th:each="writer :${newsItem.writers}">
+        <a th:href="@{/writers/{id}(id=${writer.id})" th:text="${writer.name} ">Writer name</span>
+      </li>
+    </ul>
+
+    <p th:text="${newsItem.text}">Text</p>
+
+
+
+
+
+    </body>
+
+</html>
