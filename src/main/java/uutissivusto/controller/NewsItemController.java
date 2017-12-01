@@ -57,12 +57,12 @@ public class NewsItemController {
             ni.setLead(lead);
             ni.setReadCount(0);
             ni.setText(text);
-            
+
             Writer wr = writerRepository.getOne(writerId);
             ni.addWriter(wr);
             wr.addNewsItem(ni);
             writerRepository.save(wr);
-            
+
             Category ca = categoryRepository.getOne(categoryId);
             ni.addCategory(ca);
             ca.addNewsItem(ni);
