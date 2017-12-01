@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">>
+    <head lang="en">
+    <style>
+    /*li {
+display: inline-block;
+margin: 0 10px;
+}*/
+    </style>
+        <meta charset="UTF-8" />
+        <title th:title="${category.name}">Category</title>
+    </head>
+    <body>
+    <h1>List of news under <span th:text="${category.name}"/></h1>
+      <ul th:each="newsitem : ${category.newsItems}">
+        <a th:href="@{/news/{id}(id=${newsitem.id})}" th:text="${newsitem.headline}">headline</a>
+      </ul>
+    
+
+    </body>
+
+</html>

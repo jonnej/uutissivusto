@@ -19,7 +19,19 @@
           <p th:text="${newsitem.lead}">lead</p>
 
         </li>
+      </ul>
 
+      <!-- MUUTA NÄKYVIIN JA VAIHA SESSIONISTA ID VAIN JOS KIRJAUTUNUT -->
+      <form method="POST" th:action="@{/writers}">
+        <input type="text" name="headline"/>
+        <input type="text" name="lead"/>
+        <input type="text" name="text"/>
+        <input type="hidden" name="writerId" value="1">
+        <select>
+          <option th:each="category : ${categories}" th:name="categoryId" th:text="${category.name}" th:value="${category.id}">Category name</option>
+        </select>
+        <input type="submit"/>
+      </form>
 
     </body>
 
