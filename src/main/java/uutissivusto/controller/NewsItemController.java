@@ -40,11 +40,11 @@ public class NewsItemController {
     @GetMapping("/news/{id}")
     public String showNewsItem(Model model, @PathVariable Long id) {
         NewsItem ni = newsItemRepository.getOne(id);
-        if (ni != null) {
-            model.addAttribute("newsItem", ni);
-            return "newsitem";
+        if (ni == null) {
+            return "redirect:/";
         }
-        return "redirect:/";
+        model.addAttribute("newsItem", ni);
+        return "newsitem";
     }
 
     @PostMapping("/news")
@@ -57,7 +57,7 @@ public class NewsItemController {
             ni.setLead(lead);
             ni.setReadCount(0);
             ni.setText(text);
-
+            ni = newsItemRepository.save(ni);
             Writer wr = writerRepository.getOne(writerId);
             ni.addWriter(wr);
             wr.addNewsItem(ni);
@@ -70,6 +70,7 @@ public class NewsItemController {
 
             newsItemRepository.save(ni);
         }
+        
         return "redirect:/";
     }
 

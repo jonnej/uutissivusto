@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">>
-    <head lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
     <style>
     li {
 display: inline-block;
@@ -12,9 +12,9 @@ margin: 0 10px;
     </head>
     <body>
       <h1 th:text="${newsItem.headline}">Headline</h1>
-      <ul list-style-type="none">
+      <ul>
       <li th:each="writer :${newsItem.writers}">
-        <a th:href="@{/writers/{id}(id=${writer.id})" th:text="${writer.name} ">Writer name</span>
+          <a th:href="@{/writers/{id}(id=${writer.id})" th:text="${writer.name} ">Writer name</a>
       </li>
     </ul>
 

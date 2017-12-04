@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head lang="en">
     <style>
     /*li {
@@ -15,7 +15,7 @@ margin: 0 10px;
       <ul th:each="writer : ${writers}">
         <a th:href="@{/writers/{id}(id=${writer.id})}" th:text="${writer.name}">Writer name</a>
       </ul>
-    
+
 
 
       <form method="POST" th:action="@{/writers}">

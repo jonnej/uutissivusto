@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head lang="en">
     <style>
     /*li {
@@ -17,7 +17,7 @@ margin: 0 10px;
       <ul th:each="newsitem : ${writers.newsItems}">
         <a th:href="@{/news/{id}(id=${newsitem.id})}" th:text="${newsitem.headline}">News headline</a>
       </ul>
-    
+
 
 
 
