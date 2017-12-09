@@ -1,31 +1,19 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
     <head lang="en">
     <style>
-    /*li {
-display: inline-block;
-margin: 0 10px;
-}*/
     </style>
         <meta charset="UTF-8" />
         <title>Writers</title>
     </head>
     <body>
+      <div th:fragment="content">
     <h1>Writers</h1>
       <ul th:each="writer : ${writers}">
         <a th:href="@{/writers/{id}(id=${writer.id})}" th:text="${writer.name}">Writer name</a>
       </ul>
 
-
-
-      <form method="POST" th:action="@{/writers}">
-        <input type="text" name="name"/>
-        <input type="password" name="password"/>
-        <input type="submit"/>
-      </form>
-
-
-
+    </div>
     </body>
 
 </html>

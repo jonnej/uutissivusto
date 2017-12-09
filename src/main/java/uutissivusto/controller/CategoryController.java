@@ -1,5 +1,6 @@
 package uutissivusto.controller;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +17,15 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
     
+    @Autowired
+    private HttpSession session;
+    
     @GetMapping("/categories/{id}")
     public String showCategory(@PathVariable Long id, Model model) {
         Category ca = categoryRepository.getOne(id);
         if (ca != null) {
             model.addAttribute("category", ca);
+            model.addAttribute("categories", categoryRepository.findAll());
             return "category";
         }
         return "redirect:/";

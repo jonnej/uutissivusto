@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
+    <head lang="en">
+        <title>Register account</title>
+        <meta charset="UTF-8"></meta>
+    </head>
+    <body>
+        <div th:fragment="content">
+        <h1>Log in</h1>
+        <form th:action="@{/login}" method="POST">
+            <p>Name: <input type="text" name="name"></input></p>
+            <p>Password: <input type="password" name="password"></input></p>
+            <input type="submit" value="Login!"></input>
+        </form>
+
+        <h2>Create account</h2>
+
+        <form th:action="@{/writers}" method="POST">
+            <p>Name: <input type="text" name="name"></input></p>
+            <p>Password: <input type="password" name="password"></input></p>
+            <input type="submit" value="Register as writer"></input>
+        </form>
+      </div>
+    </body>
+</html>

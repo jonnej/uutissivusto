@@ -1,20 +1,18 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
     <head lang="en">
     <style>
-    /*li {
-display: inline-block;
-margin: 0 10px;
-}*/
+
     </style>
         <meta charset="UTF-8" />
         <title th:title="${writer.name}">Writers</title>
     </head>
     <body>
+      <div th:fragment="content">
     <h1 th:text="${writer.name}">Writer name</h1>
 
     <h3>News <span th:text="${writer.name}"/> has made contribution to</h3>
-      <ul th:each="newsitem : ${writers.newsItems}">
+      <ul th:each="newsitem : ${writer.newsItems}">
         <a th:href="@{/news/{id}(id=${newsitem.id})}" th:text="${newsitem.headline}">News headline</a>
       </ul>
 
@@ -22,7 +20,7 @@ margin: 0 10px;
 
 
 
-
+    </div>
     </body>
 
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
     <head>
     <style>
     li {
@@ -11,10 +11,11 @@ margin: 0 10px;
         <title th:text="${newsItem.headline}"></title>
     </head>
     <body>
+      <div th:fragment="content">
       <h1 th:text="${newsItem.headline}">Headline</h1>
       <ul>
       <li th:each="writer :${newsItem.writers}">
-          <a th:href="@{/writers/{id}(id=${writer.id})" th:text="${writer.name} ">Writer name</a>
+          <a th:href="@{/writers/{id}(id=${writer.id})}" th:text="${writer.name} ">Writer name</a>
       </li>
     </ul>
 
@@ -23,7 +24,7 @@ margin: 0 10px;
 
 
 
-
+  </div>
     </body>
 
 </html>

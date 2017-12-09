@@ -13,5 +13,6 @@ import uutissivusto.domain.Writer;
  * @author joju
  */
 public interface WriterRepository extends JpaRepository<Writer, Long>{
-    
+  Writer findByNameAndPassword(String name, String password);
+
 }

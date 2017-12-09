@@ -1,13 +1,17 @@
 package uutissivusto.controller;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import uutissivusto.domain.Category;
 import uutissivusto.domain.Writer;
 import uutissivusto.repository.CategoryRepository;
+import uutissivusto.repository.NewsItemRepository;
 import uutissivusto.repository.WriterRepository;
 
 @Controller
@@ -18,6 +22,12 @@ public class DefaultController {
 
     @Autowired
     private WriterRepository writerRepository;
+    
+    @Autowired
+    private NewsItemRepository newsItemRepository;
+    
+    @Autowired
+    private HttpSession session;
 
     @PostConstruct
     public void init() {
@@ -40,10 +50,7 @@ public class DefaultController {
         wr.setName("Jonne");
         wr.setPassword("jonne");
         writerRepository.save(wr);
-        Writer wr1 = new Writer();
-        wr1.setName("kris");
-        wr1.setPassword("kris");
-        writerRepository.save(wr1);
+        
 
     }
 
@@ -51,11 +58,20 @@ public class DefaultController {
     public String redir() {
         return "redirect:/";
     }
-
-    @GetMapping("/navbar")
-    public String navbar(Model model) {
+    
+    @GetMapping("/")
+    public String frontPage(Model model) {
+        PageRequest pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "created");
+        model.addAttribute("newsItems", newsItemRepository.findAll(pageable));
         model.addAttribute("categories", categoryRepository.findAll());
-        return "navbar";
+        model.addAttribute("writers", writerRepository.findAll());
+        return "frontpage";
+    }
+  
+    @GetMapping("/login")
+    public String getLogin(Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "login";
     }
 
 }

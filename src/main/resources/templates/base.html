@@ -6,7 +6,7 @@
     </head>
 <style>
 
-ul {
+ul.nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -14,11 +14,11 @@ ul {
     background-color: #333;
     }
 
-li {
+li.nav {
     float: left;
 }
 
-li a {
+li a.nav {
     display: block;
     color: white;
     text-align: center;
@@ -26,7 +26,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover:not(.active) {
+li a.nav:hover:not(.active) {
     background-color: #111;
 }
 
@@ -35,13 +35,21 @@ li a:hover:not(.active) {
 }
 </style>
 <body>
-
-<ul>
-  <li><a href="/">Front page</a></li>
-  <li th:each="category : ${categories}"><a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name}">Category name</a></li>
-  <li><a href="/writers">Writers</a></li>
-  <li style="float:right"><a class="active" href="#about">About</a></li>
+<ul class="nav">
+  <li class="nav"><a href="/">Front page</a></li>
+  <li class="nav" th:each="category : ${categories}"><a class="nav" th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Category name</a></li>
+  <li class="nav" style="float:right"><a class="active" href="/writers">Writers</a></li>
 </ul>
+<br>
+<div th:if="${messages != null}">
+<ul th:each="message : ${messages}">
+  <li th:text="${message}">error</li>
+</ul>
+</div>
+<br>
+
+<div th:include="this :: content"/>
+
 
 
 
