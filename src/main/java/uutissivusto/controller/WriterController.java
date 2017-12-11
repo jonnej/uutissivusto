@@ -47,6 +47,7 @@ public class WriterController {
             Writer writer = new Writer();
             writer.setName(name);
             writer = writerRepository.save(writer);
+            session.setAttribute("current", writer.getId());
             return "redirect:/writers/" + writer.getId();
         }
 

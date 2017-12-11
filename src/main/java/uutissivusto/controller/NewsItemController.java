@@ -58,14 +58,14 @@ public class NewsItemController {
     }
 
     @PostMapping("/news/addnew")
-    public String addNewsItem(Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam List<Long> writerList,
-            @RequestParam List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
+    public String addNewsItem(Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam(required=false) List<Long> writerList,
+            @RequestParam(required=false) List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
 
         if (session.getAttribute("current") == null) {
             return "redirect:/";
         }
         List<String> messages = new ArrayList();
-        if (headline.trim().isEmpty() || text.trim().isEmpty() || lead.trim().isEmpty() || writerList.isEmpty() || categoryList.isEmpty()) {
+        if (headline.trim().isEmpty() || text.trim().isEmpty() || lead.trim().isEmpty() || writerList == null || categoryList == null) {
             messages.add("Headline, lead text and/or text can't be empty");
             messages.add("You must choose atleast one writer and one category");
         }
@@ -124,8 +124,8 @@ public class NewsItemController {
     }
 
     @PostMapping("/news/{id}/edit")
-    public String editNewsItem(@PathVariable Long id, Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam List<Long> writerList,
-            @RequestParam List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
+    public String editNewsItem(@PathVariable Long id, Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam(required=false) List<Long> writerList,
+            @RequestParam(required=false) List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
         NewsItem ni = newsItemRepository.getOne(id);
         Writer wr = writerRepository.getOne((Long) session.getAttribute("current"));
         if (ni == null || !wr.getNewsItems().contains(ni)) {

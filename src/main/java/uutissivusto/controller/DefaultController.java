@@ -78,6 +78,9 @@ public class DefaultController {
   
     @GetMapping("/login")
     public String getLogin(Model model) {
+        if (session.getAttribute("current") != null) {
+            return "redirect:/";
+        }
         model.addAttribute("categories", categoryRepository.findAll());
         return "login";
     }
@@ -98,7 +101,7 @@ public class DefaultController {
     
     @GetMapping("/logout")
     public String logout() {
-        session.invalidate();
+        session.removeAttribute("current");
         return "redirect:/login";
     }
 

@@ -4,6 +4,7 @@
 
         <meta charset="UTF-8" />
         <title>Welcome to News paradise!</title>
+        
     </head>
     <body>
 
@@ -15,10 +16,11 @@
         <p>Edit headline: <input type="text" th:field="${newsitem.headline}" name="headline"/></p>
         <p>Edit lead text: <input type="text" th:field="${newsitem.lead}" name="lead"/></p>
         <p>Change image: <input type="file" name="file" id="file"/></p>
-        Writer: <select name="writerList" id="writerList" multiple="multiple">
+        Writer: <select required="required" name="writerList" id="writerList" multiple="multiple">
           <option th:each="writer : ${writers}" th:text="${writer.name}" th:value="${writer.id}">Writer name</option>
         </select>
         Category: <select name="categoryList" id="categoryList" multiple="multiple">
+          <option value="">Choose categories</option>
           <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category name</option>
         </select>
       </form>
