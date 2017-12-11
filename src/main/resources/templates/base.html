@@ -75,6 +75,8 @@ div.lbord {
   <li class="nav"><a class="nav" href="/">Front page</a></li>
   <li class="nav" th:each="category : ${categories}"><a class="nav" th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Category name</a></li>
   <li class="nav" style="float:right"><a class="nav" href="/writers">Writers</a></li>
+  <li class="nav"><a class="nav" th:href="@{/news/mostviewed}">Most clicked news</a></li>
+  <li class="nav"><a class="nav" th:href="@{/news/mostrecent}">Most recent news</a></li>
   <div th:if="${session.current} != null">
   <li class="nav" style="float:right"><a class="nav" th:href="@{/logout}">Logout</a></li>
   <li class="nav" style="float:right"><a class="nav" th:href="@{/writers/{id}(id=${session.current})}">Own Details</a></li>

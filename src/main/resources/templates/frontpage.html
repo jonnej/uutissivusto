@@ -9,7 +9,7 @@
 
     <div th:fragment="content">
 
-      <h1>Most recent News</h1>
+      <h1 th:text="${ordertype}"></h1>
 
       <ul class="none">
         <li th:each="newsitem :${newsItems}">
@@ -17,6 +17,7 @@
           <div th:if="${newsitem.image != null}">
               <img th:src="@{/news/{id}/image(id=${newsitem.id})}" width="20%"/>
           </div>
+          <p>Created: [[${newsitem.created}]] | Readcount: [[${newsitem.readCount}]]</p> 
           <p th:text="${newsitem.lead}">lead</p>
         </li>
       </ul>

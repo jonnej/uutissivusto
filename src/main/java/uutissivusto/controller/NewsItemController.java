@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +39,24 @@ public class NewsItemController {
 
     @Autowired
     private HttpSession session;
+    
+    @GetMapping("/news/mostrecent")
+    public String listByCreationTime(Model model) {        
+        model.addAttribute("newsItems", newsItemRepository.findAllByOrderByCreatedDesc());
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("writers", writerRepository.findAll());
+        model.addAttribute("ordertype", "News ordered by creation time");
+        return "frontpage";
+    }
+    
+    @GetMapping("/news/mostviewed")
+    public String listByViewCount(Model model) {
+        model.addAttribute("newsItems", newsItemRepository.findAllByOrderByReadCountDesc());
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("writers", writerRepository.findAll());
+        model.addAttribute("ordertype", "News ordered by view count");
+        return "frontpage";
+    }
 
     @GetMapping("/news/{id}")
     public String showNewsItem(Model model, @PathVariable Long id) {

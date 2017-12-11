@@ -73,6 +73,7 @@ public class DefaultController {
         model.addAttribute("newsItems", newsItemRepository.findAll(pageable));
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("writers", writerRepository.findAll());
+        model.addAttribute("ordertype", "5 Most recent news");
         return "frontpage";
     }
   
