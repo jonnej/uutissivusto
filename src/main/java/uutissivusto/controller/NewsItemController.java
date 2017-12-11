@@ -88,7 +88,7 @@ public class NewsItemController {
             return "redirect:/";
         }
         List<String> messages = new ArrayList();
-        if (headline.trim().length() < 3 || headline.length() > 100 || lead.trim().length() < 5 || lead.length() > 220 || text.trim().length() < 10 || writerList == null || categoryList == null) {
+        if (headline.trim().length() < 3 || headline.length() > 100 || lead.trim().length() < 10 || lead.length() > 220 || text.trim().length() < 10 || writerList == null || categoryList == null) {
             messages.add("Headline must contain atleast 3 non whitespace characters and max 100 characters");
             messages.add("Lead text must contain atleast 5 non whitespace characters and max 220 characters");
             messages.add("Textarea must contain atleast 10 non whitespace characters");
@@ -158,7 +158,7 @@ public class NewsItemController {
         }
 
         List<String> messages = new ArrayList();
-        if (headline.trim().length() < 3 || headline.length() > 100 || lead.trim().length() < 5 || lead.length() > 220 || text.trim().length() < 10 || writerList == null || categoryList == null) {
+        if (headline.trim().length() < 3 || headline.length() > 100 || lead.trim().length() < 10 || lead.length() > 220 || text.trim().length() < 10 || writerList == null || categoryList == null) {
             messages.add("Headline must contain atleast 3 non whitespace characters and max 100 characters");
             messages.add("Lead text must contain atleast 5 non whitespace characters and max 220 characters");
             messages.add("Textarea must contain atleast 10 non whitespace characters");

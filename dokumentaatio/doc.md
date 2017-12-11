@@ -26,12 +26,24 @@ Käyttötapaukset
 4. Käyttäjä (ei tarvitse olla kirjautunut) haluu selata uutisia tietystä kategoriasta.
 - Sivuston navigaatiopalkissa listataan sivustolla käytössä olevat kategoriat.
 - Linkkiä klikkaamalla käyttäjä siirtyy kategorian omalle sivulle, jossa on lista uutisista, jotka kuuluvat kyseiseen kategoriaan.
+5. Käyttäjä haluaa poistaa uutisen.
+- Käyttäjän pitää olla yksi uutisen kirjoittajista.
+- Tapahtuu samalta sivulta kuin uutisen editoiminen.
+- Uutisen poistaminen tapahtuu Delete article napista.
+- Onnistuessaan poistaa uutisen tietokannasta ja relaatiot kirjoittajista (writer) ja kategorioista (category), joihin uutinen oli linkitetty.
 
 ===========================
 Käyttöohje
 --------------------
 Sivustolla liikutaan linkkejä klikkaamalla. Myös osoitteiden kirjoittaminen suoraan on mahdollista, jos sivu löytyy. Kirjoittaakseen uutisen, pitää käyttäjän olla rekisteröitynyt/kirjautunut sivustolle. Tämä tapahtuu navigaatiopalkissa löytyvän login/register linkin takaa. Valmiit käyttäjätunnukset: Name: Jonne password: jonne JA Name: Krist password: Krist
+Kuvan lisäämisessä toimivat formaatit ovat .png ja .gif. Uutisten editoiminen onnistuu käytäjiltä, jotka ovat uutisen kirjoittajiin lisätty. Myös uutisen poisto onnistuu.
 
 ============================
 Puuttuvat ominaisuudet ja muut puutteet
 ---------------------
+- Uutisten järjestäminen kategorian sisäisesti ajan tai lukukertojen mukaan ei ole tuettu toiminto.
+- Kategorioiden lisääminen sivustolla ei onnistu klikkailemalla kuten uutisen tai kirjoittajan tapauksessa. Lisääminen onnistuu lähettämällä post pyyntö oikealla parametrilla oikeaan osoitteeseen (luultavasti).
+- Kirjoittajien ja kategorioiden poistaminen uutisesta ei onnistu, jos kirjoittaja/kategoria on jo kerran siihen lisätty.
+- Automaattiset testit puuttuvat kokonaan. Sivuston toimintaa on testattu paikallisesti lisäämällä kirjoittajia ja uutisia. Testaaminen ei kuitenkaan ole ollut riittävällä tasolla.
+- NewsItemControllerissa liikaa tavaraa, jonka voisi eriyttää omaan service luokkaan.
+- Muutenkin rakenne vähän sekainen. 
