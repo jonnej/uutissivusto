@@ -11,19 +11,19 @@
 
       <h2>Write news</h2>
 
-      <form method="POST" th:action="@{/news}" th:id="form" enctype="multipart/form-data">
+      <form method="POST" th:action="@{/news/addnew}" th:id="form" enctype="multipart/form-data">
         <p>Headline: <input type="text" name="headline"/></p>
         <p>Lead text: <input type="text" name="lead"/></p>
         <p>Add image: <input type="file" name="file" id="file"/></p>
-        Writer: <select name="writerId">
+        Writer: <select name="writerList" id="writerList" multiple="multiple">
           <option th:each="writer : ${writers}" th:text="${writer.name}" th:value="${writer.id}">Writer name</option>
         </select>
-        Category: <select name="categoryId">
+        Category: <select name="categoryList" id="categoryList" multiple="multiple">
           <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category name</option>
         </select>
       </form>
         <br>
-        <textarea rows="7" cols="50" name="text" form="form"></textarea>
+        <textarea rows="7" cols="50" name="text" form="form">Valmista tekstiä</textarea>
         <br>
         <input type="submit" form="form"/>
 

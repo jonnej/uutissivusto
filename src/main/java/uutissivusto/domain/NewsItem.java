@@ -8,6 +8,7 @@ package uutissivusto.domain;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -27,7 +28,9 @@ public class NewsItem extends AbstractPersistable<Long> {
     private String headline;
     private String lead;
     private LocalDateTime created;
+    @Lob
     private String text;
+    private int readCount;
     
     @Lob
     private byte[] image;
@@ -38,7 +41,6 @@ public class NewsItem extends AbstractPersistable<Long> {
     @ManyToMany
     private List<Category> categories;
     
-    private int readCount;
     
     public NewsItem() {
         this.created = LocalDateTime.now();
@@ -61,6 +63,15 @@ public class NewsItem extends AbstractPersistable<Long> {
         if (!this.categories.contains(ca)) {
             this.categories.add(ca);
         }
+    }
+    
+    public boolean isWrittenBy(Long writerId) {
+        for (Writer wr : this.writers) {
+            if (Objects.equals(wr.getId(), writerId)) {
+                return true;
+            }
+        }
+        return false;
     }
    
 }

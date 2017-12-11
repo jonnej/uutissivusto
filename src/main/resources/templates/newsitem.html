@@ -1,30 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
     <head>
-    <style>
-    li {
-display: inline-block;
-margin: 0 10px;
-}
-    </style>
+        <style>
+        </style>
         <meta charset="UTF-8" />
         <title th:text="${newsItem.headline}"></title>
     </head>
     <body>
-      <div th:fragment="content">
-      <h1 th:text="${newsItem.headline}">Headline</h1>
-      <ul>
-      <li th:each="writer :${newsItem.writers}">
-          <a th:href="@{/writers/{id}(id=${writer.id})}" th:text="${writer.name} ">Writer name</a>
-      </li>
-    </ul>
+        <div th:fragment="content">
+            <div th:if="${newsItem.image != null}">
+                <img th:src="@{/news/{id}/image(id=${newsItem.id})}" width="60%"/>
+            </div>
+            <p th:text="${newsItem.created} ">
+              <div th:if="${newsItem.isWrittenBy(session.current) == true}">
+              <a th:href="@{/news/{id}/edit(id=${newsItem.id})}">Edit</a>
+            </div>
+            </p>
+            Written by:<a th:each="writer :${newsItem.writers}" th:href="@{/writers/{id}(id=${writer.id})}" th:inline="text"> [[${writer.name}]] |</a>
+            <p>Read <span th:text="${newsItem.readCount}"/> times</p>
+            <h1 th:text="${newsItem.headline}">Headline</h1>
 
-    <p th:text="${newsItem.text}">Text</p>
+            <p class="groove" th:text="${newsItem.text}">Text</p>
 
 
 
 
-  </div>
+        </div>
     </body>
 
 </html>

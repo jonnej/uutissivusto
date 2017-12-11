@@ -34,19 +34,6 @@ public class WriterController {
         return "writers";
     }
 
-    @PostMapping("/login")
-    public String handleLogin(@RequestParam String name, @RequestParam String password, Model model) {
-      Writer writer = writerRepository.findByNameAndPassword(name, password);
-      if (writer == null) {
-        List<String> messages = new ArrayList();
-        messages.add("Name or password wrong");
-        model.addAttribute("messages", messages);
-        return "login";
-      }
-      session.setAttribute("current", writer);
-      return "redirect:/";
-    }
-
     @PostMapping("/writers")
     public String addWriter(@RequestParam String name, @RequestParam String password, Model model) {
         List<String> messages = new ArrayList();

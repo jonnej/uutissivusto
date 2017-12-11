@@ -1,38 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
     <head lang="en">
-      <link rel="import" href="/path/to/navbar.html">
+
         <meta charset="UTF-8" />
-        <title>Welcome to News paradise!</title>
+        <title></title>
     </head>
     <body>
 
     <div th:fragment="content">
 
-      <h2>Newest News</h2>
+      <h1>Most recent News</h1>
 
-      <ul list-style-type="none">
+      <ul class="v">
         <li th:each="newsitem :${newsItems}">
-          <strong><a th:href="@{/news/{id}(id=${newsitem.id})}" th:text="${newsitem.headline}">headline</a></strong>
+          <h3><a th:href="@{/news/{id}(id=${newsitem.id})}" th:text="${newsitem.headline}">headline</a></h3>
+          <div th:if="${newsitem.image != null}">
+              <img th:src="@{/news/{id}/image(id=${newsitem.id})}" width="30%"/>
+          </div>
           <p th:text="${newsitem.lead}">lead</p>
-
         </li>
       </ul>
 
-      <!-- MUUTA NÄKYVIIN JA VAIHA SESSIONISTA ID VAIN JOS KIRJAUTUNUT -->
-
-      <form method="POST" th:action="@{/news}">
-        <input type="text" name="headline"/>
-        <input type="text" name="lead"/>
-        <input type="text" name="text"/>
-        <select name="writerId">
-          <option th:each="writer : ${writers}" th:text="${writer.name}" th:value="${writer.id}">Writer name</option>
-        </select>
-        <select name="categoryId">
-          <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category name</option>
-        </select>
-        <input type="submit"/>
-      </form>
     </div>
     </body>
 

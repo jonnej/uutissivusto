@@ -2,9 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head lang="en">
         <meta charset="UTF-8" />
-        <title>Title</title>
+        <title>News paradise!</title>
     </head>
 <style>
+
+body {
+  background-color: #ffd480
+}
+
+p.groove {
+  border-style: groove;
+  border-color: #a3a3c2
+}
+
+ul.v {
+  list-style-type: none;
+}
 
 ul.nav {
     list-style-type: none;
@@ -33,22 +46,43 @@ li a.nav:hover:not(.active) {
 .active {
     background-color: #4CAF50;
 }
+
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: blue;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
 </style>
 <body>
 <ul class="nav">
-  <li class="nav"><a href="/">Front page</a></li>
+  <li class="nav"><a class="nav" href="/">Front page</a></li>
   <li class="nav" th:each="category : ${categories}"><a class="nav" th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Category name</a></li>
-  <li class="nav" style="float:right"><a class="active" href="/writers">Writers</a></li>
+  <li class="nav" style="float:right"><a class="nav" href="/writers">Writers</a></li>
+  <div th:if="${session.current} != null">
+  <li class="nav" style="float:right"><a class="nav" th:href="@{/logout}">Logout</a></li>
+  <li class="nav" style="float:right"><a class="nav" th:href="@{/writers/{id}(id=${session.current})}">Own Details</a></li>
+  </div>
+  <div th:if="${session.current == null}">
+  <li class="nav" style="float:right"><a class="nav" th:href="@{/login}">Login or Register</a></li>
+  </div>
+
 </ul>
-<br>
+
 <div th:if="${messages != null}">
 <ul th:each="message : ${messages}">
   <li th:text="${message}">error</li>
 </ul>
 </div>
-<br>
 
-<div th:include="this :: content"/>
+
+<div align="center" th:include="this :: content"/>
 
 
 

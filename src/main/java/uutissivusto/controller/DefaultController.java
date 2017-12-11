@@ -1,5 +1,7 @@
 package uutissivusto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import uutissivusto.domain.Category;
 import uutissivusto.domain.Writer;
 import uutissivusto.repository.CategoryRepository;
@@ -50,6 +54,10 @@ public class DefaultController {
         wr.setName("Jonne");
         wr.setPassword("jonne");
         writerRepository.save(wr);
+        Writer wr1 = new Writer();
+        wr1.setName("Krist");
+        wr1.setPassword("Krist");
+        writerRepository.save(wr1);
         
 
     }
@@ -72,6 +80,26 @@ public class DefaultController {
     public String getLogin(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
         return "login";
+    }
+    
+    @PostMapping("/login")
+    public String handleLogin(@RequestParam String name, @RequestParam String password, Model model) {
+      Writer writer = writerRepository.findByNameAndPassword(name, password);
+      if (writer == null) {
+        List<String> messages = new ArrayList();
+        messages.add("Name or password wrong");
+        model.addAttribute("messages", messages);
+        return "login";
+      }
+      session.setAttribute("current", writer.getId());
+      return "redirect:/";
+    }
+
+    
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate();
+        return "redirect:/login";
     }
 
 }

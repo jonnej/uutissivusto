@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
+    <head lang="en">
+
+        <meta charset="UTF-8" />
+        <title>Welcome to News paradise!</title>
+    </head>
+    <body>
+
+    <div th:fragment="content">
+
+      <h2>Edit <span th:text="${newsitem.headline}"/></h2>
+
+      <form method="POST" th:action="@{/news/{id}/edit(id=${newsitem.id})}" th:id="form" enctype="multipart/form-data">
+        <p>Edit headline: <input type="text" th:field="${newsitem.headline}" name="headline"/></p>
+        <p>Edit lead text: <input type="text" th:field="${newsitem.lead}" name="lead"/></p>
+        <p>Change image: <input type="file" name="file" id="file"/></p>
+        Writer: <select name="writerList" id="writerList" multiple="multiple">
+          <option th:each="writer : ${writers}" th:text="${writer.name}" th:value="${writer.id}">Writer name</option>
+        </select>
+        Category: <select name="categoryList" id="categoryList" multiple="multiple">
+          <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category name</option>
+        </select>
+      </form>
+        <br>
+        <textarea rows="7" cols="50" name="text" form="form" th:text="${newsitem.text}"></textarea>
+        <br>
+        <input type="submit" value="Edit article" form="form"/>
+        <br>
+        <h3> Delete <span th:text="${newsitem.headline}"/></h3>
+        <form method="DELETE" name="deleteform" th:id="deleteform" th:action="@{/news/{id}/edit(id=${newsitem.id})}">
+          <input type="submit" value="Delete article" form="deleteform"/>
+        </form>
+
+    </div>
+    </body>
+
+</html>
