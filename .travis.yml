@@ -1,1 +1,8 @@
 language: java
+deploy:
+  provider: heroku
+  api_key:
+    secure: O74fsu/v/CBrk5bkFaIJ5eguz4puK1hKzwq0XXGl263689gbGq/RnJDvRDu302Z8dUWOAwWVG47dBM1TdAcNmDYpC77A5YrZ7xVwKx4k7LHTpZsL/PElfnKHA/ZaetD7WlBaK+C+KgtxitaP/+eoLfYAVjh5e5pKNW9jwiAvBZOGb9TiVlT+JOCzBvahfapp0aAg97XGhfKHkqBTnlbKNMTl38BeJGm8Wd+6b/sSb8soOccdPJHeEmZyKXLwtrZoBw2+rQQtUI3jvKgYgG/XhfAdo19yhT4i4XnKMD8noHtNysHEskAcc9mEwavbuDz3GBx+lvoH5NOpgkxaXd/impRQxBs1JAV7tMNPzlWpAM2FkYySqVVy+F0qE7IX8OsMiHS3uL2X9/Tm71HXqAryo1ODq8stq+6DrXQwa8qHwzta2lHZy/NeAftgNgfKaBIl21NIHkAfUNGib36W+Zc+0kWyXBMndQLqdODPyzBtM4V7VqRIP4AVArnoWuY7kVcE1g28UYKSeVQRB8nuGY54YWPfGZPJ+x9OJrdMo4tEuzXcs8aRztXC2Omq4Sq9FIMUN2aaRPdxRkDOdVq/BicK7p76aZxE0bDk8KzVpHZaMlxpn/3t8yOaKv+UP66hxUx2QxyUsYN8KF6uQIxV/0uKW/b+a1Ok5N2qOmqSpbYM3jI=
+  app: hidden-springs-11492
+  on:
+    repo: jonnej/uutissivusto
