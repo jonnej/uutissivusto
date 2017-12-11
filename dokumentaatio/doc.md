@@ -27,7 +27,11 @@ Käyttötapaukset
 - Sivuston navigaatiopalkissa listataan sivustolla käytössä olevat kategoriat.
 - Linkkiä klikkaamalla käyttäjä siirtyy kategorian omalle sivulle, jossa on lista uutisista, jotka kuuluvat kyseiseen kategoriaan.
 
-=================================
+===========================
 Käyttöohje
 --------------------
-Sivustolla liikutaan linkkejä klikkaamalla. Myös osoitteiden kirjoittaminen suoraan on mahdollista, jos sivu löytyy. Kirjoittaakseen uutisen, pitää käyttäjän olla rekisteröitynyt/kirjautunut sivustolle. Tämä tapahtuu navigaatiopalkissa löytyvän login/register linkin takaa.
+Sivustolla liikutaan linkkejä klikkaamalla. Myös osoitteiden kirjoittaminen suoraan on mahdollista, jos sivu löytyy. Kirjoittaakseen uutisen, pitää käyttäjän olla rekisteröitynyt/kirjautunut sivustolle. Tämä tapahtuu navigaatiopalkissa löytyvän login/register linkin takaa. Valmiit käyttäjätunnukset: Name: Jonne password: jonne JA Name: Krist password: Krist
+
+============================
+Puuttuvat ominaisuudet ja muut puutteet
+---------------------

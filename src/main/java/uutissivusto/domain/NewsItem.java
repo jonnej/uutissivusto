@@ -12,6 +12,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -25,10 +26,13 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 public class NewsItem extends AbstractPersistable<Long> {
     
+    @Size(min=3, max=100)
     private String headline;
+    @Size(min=10, max=220)
     private String lead;
     private LocalDateTime created;
     @Lob
+    @Size(min=10)
     private String text;
     private int readCount;
     

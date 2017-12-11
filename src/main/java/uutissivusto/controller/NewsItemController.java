@@ -39,16 +39,16 @@ public class NewsItemController {
 
     @Autowired
     private HttpSession session;
-    
+
     @GetMapping("/news/mostrecent")
-    public String listByCreationTime(Model model) {        
+    public String listByCreationTime(Model model) {
         model.addAttribute("newsItems", newsItemRepository.findAllByOrderByCreatedDesc());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("writers", writerRepository.findAll());
         model.addAttribute("ordertype", "News ordered by creation time");
         return "frontpage";
     }
-    
+
     @GetMapping("/news/mostviewed")
     public String listByViewCount(Model model) {
         model.addAttribute("newsItems", newsItemRepository.findAllByOrderByReadCountDesc());
@@ -81,15 +81,17 @@ public class NewsItemController {
     }
 
     @PostMapping("/news/addnew")
-    public String addNewsItem(Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam(required=false) List<Long> writerList,
-            @RequestParam(required=false) List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
+    public String addNewsItem(Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam(required = false) List<Long> writerList,
+            @RequestParam(required = false) List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
 
         if (session.getAttribute("current") == null) {
             return "redirect:/";
         }
         List<String> messages = new ArrayList();
-        if (headline.trim().isEmpty() || text.trim().isEmpty() || lead.trim().isEmpty() || writerList == null || categoryList == null) {
-            messages.add("Headline, lead text and/or text can't be empty");
+        if (headline.trim().length() < 3 || headline.length() > 100 || lead.trim().length() < 5 || lead.length() > 220 || text.trim().length() < 10 || writerList == null || categoryList == null) {
+            messages.add("Headline must contain atleast 3 non whitespace characters and max 100 characters");
+            messages.add("Lead text must contain atleast 5 non whitespace characters and max 220 characters");
+            messages.add("Textarea must contain atleast 10 non whitespace characters");
             messages.add("You must choose atleast one writer and one category");
         }
         if (!messages.isEmpty()) {
@@ -147,8 +149,8 @@ public class NewsItemController {
     }
 
     @PostMapping("/news/{id}/edit")
-    public String editNewsItem(@PathVariable Long id, Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam(required=false) List<Long> writerList,
-            @RequestParam(required=false) List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
+    public String editNewsItem(@PathVariable Long id, Model model, @RequestParam String headline, @RequestParam String lead, @RequestParam(required = false) List<Long> writerList,
+            @RequestParam(required = false) List<Long> categoryList, @RequestParam String text, @RequestParam("file") MultipartFile file) throws IOException {
         NewsItem ni = newsItemRepository.getOne(id);
         Writer wr = writerRepository.getOne((Long) session.getAttribute("current"));
         if (ni == null || !wr.getNewsItems().contains(ni)) {
@@ -156,8 +158,10 @@ public class NewsItemController {
         }
 
         List<String> messages = new ArrayList();
-        if (headline.trim().isEmpty() || text.trim().isEmpty() || lead.trim().isEmpty() || writerList == null || categoryList == null) {
-            messages.add("Headline, lead text and/or text can't be empty");
+        if (headline.trim().length() < 3 || headline.length() > 100 || lead.trim().length() < 5 || lead.length() > 220 || text.trim().length() < 10 || writerList == null || categoryList == null) {
+            messages.add("Headline must contain atleast 3 non whitespace characters and max 100 characters");
+            messages.add("Lead text must contain atleast 5 non whitespace characters and max 220 characters");
+            messages.add("Textarea must contain atleast 10 non whitespace characters");
             messages.add("You must choose atleast one writer and one category");
         }
         if (!messages.isEmpty()) {
@@ -197,7 +201,6 @@ public class NewsItemController {
     }
 
     @DeleteMapping("/news/{id}/edit")
-    @Transactional
     public String deleteNewsItem(@PathVariable Long id) {
         NewsItem ni = newsItemRepository.getOne(id);
         Writer wr = writerRepository.getOne((Long) session.getAttribute("current"));
@@ -206,9 +209,11 @@ public class NewsItemController {
         }
         for (Category ca : ni.getCategories()) {
             ca.getNewsItems().remove(ni);
+            categoryRepository.save(ca);
         }
         for (Writer writer : ni.getWriters()) {
             writer.getNewsItems().remove(ni);
+            writerRepository.save(writer);
         }
         newsItemRepository.delete(ni);
         return "redirect:/";
