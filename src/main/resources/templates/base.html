@@ -15,7 +15,7 @@ p.groove {
   border-color: #a3a3c2
 }
 
-ul.v {
+ul.none {
   list-style-type: none;
 }
 
@@ -59,6 +59,16 @@ a:hover {
   text-decoration: underline;
 }
 
+div.scroll {
+    width: 30%;
+    height: 250px;
+    overflow: scroll;
+}
+
+div.lbord {
+  border-left: 5px solid black;
+}
+
 </style>
 <body>
 <ul class="nav">
@@ -68,6 +78,7 @@ a:hover {
   <div th:if="${session.current} != null">
   <li class="nav" style="float:right"><a class="nav" th:href="@{/logout}">Logout</a></li>
   <li class="nav" style="float:right"><a class="nav" th:href="@{/writers/{id}(id=${session.current})}">Own Details</a></li>
+  <li class="nav" style="float:right"><a class="nav" th:href="@{/news/addnew}">Add article</a></li>
   </div>
   <div th:if="${session.current == null}">
   <li class="nav" style="float:right"><a class="nav" th:href="@{/login}">Login or Register</a></li>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,6 +48,8 @@ public class NewsItemController {
         ni = newsItemRepository.save(ni);
         model.addAttribute("newsItem", ni);
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("mostViewed", newsItemRepository.findAllByOrderByReadCountDesc());
+        model.addAttribute("recentNews", newsItemRepository.findAllByOrderByCreatedDesc());
         return "newsitem";
     }
 
@@ -103,7 +106,7 @@ public class NewsItemController {
         return "redirect:/";
     }
 
-    @GetMapping(path = "/news/{id}/image", produces = {"image/png", "image/gif", "image/jpg"})
+    @GetMapping(path = "/news/{id}/image", produces = {"image/png", "image/gif", MediaType.IMAGE_JPEG_VALUE})
     @ResponseBody
     public byte[] getContent(@PathVariable Long id) {
         return newsItemRepository.getOne(id).getImage();
@@ -133,7 +136,7 @@ public class NewsItemController {
         }
 
         List<String> messages = new ArrayList();
-        if (headline.trim().isEmpty() || text.trim().isEmpty() || lead.trim().isEmpty() || writerList.isEmpty() || categoryList.isEmpty()) {
+        if (headline.trim().isEmpty() || text.trim().isEmpty() || lead.trim().isEmpty() || writerList == null || categoryList == null) {
             messages.add("Headline, lead text and/or text can't be empty");
             messages.add("You must choose atleast one writer and one category");
         }

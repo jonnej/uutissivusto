@@ -5,6 +5,7 @@
  */
 package uutissivusto.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import uutissivusto.domain.NewsItem;
 
@@ -13,5 +14,8 @@ import uutissivusto.domain.NewsItem;
  * @author joju
  */
 public interface NewsItemRepository extends JpaRepository<NewsItem, Long> {
+    
+    List<NewsItem> findAllByOrderByCreatedDesc();
+    List<NewsItem> findAllByOrderByReadCountDesc();
     
 }

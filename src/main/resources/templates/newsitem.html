@@ -2,14 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:include="base">
     <head>
         <style>
+
         </style>
         <meta charset="UTF-8" />
         <title th:text="${newsItem.headline}"></title>
     </head>
     <body>
-        <div th:fragment="content">
+
+        <div style="width:100%" th:fragment="content" >
+          <div style="float:left; width:75%;" >
             <div th:if="${newsItem.image != null}">
-                <img th:src="@{/news/{id}/image(id=${newsItem.id})}" width="60%"/>
+                <img th:src="@{/news/{id}/image(id=${newsItem.id})}" width="40%"/>
             </div>
             <p th:text="${newsItem.created} ">
               <div th:if="${newsItem.isWrittenBy(session.current) == true}">
@@ -20,11 +23,18 @@
             <p>Read <span th:text="${newsItem.readCount}"/> times</p>
             <h1 th:text="${newsItem.headline}">Headline</h1>
 
-            <p class="groove" th:text="${newsItem.text}">Text</p>
-
-
-
-
+            <p th:text="${newsItem.text}">Text</p>
+          </div>
+          <div class="lbord" style="float:right; width:20%;">
+            <h3>Recent news</h3>
+            <ul class="none" th:each="recent : ${recentNews}">
+              <a th:href="@{/news/{id}(id=${recent.id})}" th:text="${recent.headline}">headline</a>
+            </ul>
+            <h3>Most viewed news</h3>
+            <ul class="none" th:each="viewed : ${mostViewed}">
+              <a th:href="@{/news/{id}(id=${viewed.id})}" th:text="${viewed.headline}">headline</a>
+            </ul>
+          </div>
         </div>
     </body>
 

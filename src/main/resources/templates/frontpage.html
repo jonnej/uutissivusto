@@ -11,11 +11,11 @@
 
       <h1>Most recent News</h1>
 
-      <ul class="v">
+      <ul class="none">
         <li th:each="newsitem :${newsItems}">
           <h3><a th:href="@{/news/{id}(id=${newsitem.id})}" th:text="${newsitem.headline}">headline</a></h3>
           <div th:if="${newsitem.image != null}">
-              <img th:src="@{/news/{id}/image(id=${newsitem.id})}" width="30%"/>
+              <img th:src="@{/news/{id}/image(id=${newsitem.id})}" width="20%"/>
           </div>
           <p th:text="${newsitem.lead}">lead</p>
         </li>
